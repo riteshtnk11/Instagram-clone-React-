@@ -1,18 +1,33 @@
-import React from 'react';
-import './App.css';
-
+import React from "react";
+import "./App.css";
+import Post from "./Post";
 function App() {
   return (
     <div className="App">
-      
       <div className="app__header">
-        <img 
+        <img
           className="app__headerImage"
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
       </div>
-      <h1>Start to build instagram Clone!</h1>
+      <h1>Let's build Instagram Clone!</h1>
+
+      <Post
+        username="ritesh_insta1"
+        caption="WOW it works"
+        imageUrl="https://www.freecodecamp.org/news/content/images/size/w2000/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png"
+      />
+      <Post
+        username="ritesh_insta2"
+        caption="WOW it works"
+        imageUrl="https://www.freecodecamp.org/news/content/images/size/w2000/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png"
+      />
+      <Post
+        username="ritesh_insta3"
+        caption="WOW it works"
+        imageUrl="https://www.freecodecamp.org/news/content/images/size/w2000/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png"
+      />
 
       {/* Header */}
       {/* Posts */}
