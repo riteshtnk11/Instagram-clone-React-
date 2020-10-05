@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Post from "./Post";
+import { db } from "./firebase";
+
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      username: "ritesh_insta1",
-      caption: "WOW it works",
-      imageUrl: "https://www.freecodecamp.org/news/content/images/size/w2000/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png"
-    },
-    {
-      username: "ritesh_insta2",
-      caption: "WOW it works",
-      imageUrl: "https://www.freecodecamp.org/news/content/images/size/w2000/2020/02/Ekran-Resmi-2019-11-18-18.08.13.png"
-    }
-  ]);
+  //useState hook react
+  const [posts, setPosts] = useState([]);
+
+  //useEffect runs a piece of code based on specific condition
+  useEffect(() => {
+    //this is where the code runs
+    db.collection("posts").onSnapshot((snapshot) => {
+      //onsnapshot => Every time a new post is added this code runs
+      setPosts(snapshot.docs.map((doc) => doc.data())); //maps through each of the doc
+    });
+  }, []); //If [] is blank means it will run once, when the main App component loads and if [posts] is passesd it will run everytime the variable posts changes.
 
   return (
     <div className="App">
@@ -26,11 +27,13 @@ function App() {
       </div>
       <h1>Let's build Instagram Clone!</h1>
 
-      {
-        posts.map(post => (
-          <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl}/>
-        ))
-      }
+      {posts.map((post) => (
+        <Post
+          username={post.username}
+          caption={post.caption}
+          imageUrl={post.imageUrl}
+        />
+      ))}
       {/* Header */}
       {/* Posts */}
       {/* Posts */}
