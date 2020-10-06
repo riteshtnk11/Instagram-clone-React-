@@ -5,6 +5,7 @@ import { auth, db } from "./firebase";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Button, Input } from "@material-ui/core";
+import FileUpload from "./FileUpload";
 
 function getModalStyle() {
   const top = 50;
@@ -72,16 +73,18 @@ function App() {
   //useEffect runs a piece of code based on specific condition
   useEffect(() => {
     //this is where the code runs
-    db.collection("posts").onSnapshot((snapshot) => {
-      //onsnapshot => Every time a new post is added this code runs
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          //maps through each of the doc
-          id: doc.id,
-          post: doc.data(),
-        }))
-      );
-    });
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        //onsnapshot => Every time a new post is added this code runs
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            //maps through each of the doc
+            id: doc.id,
+            post: doc.data(),
+          }))
+        );
+      });
   }, []); //If [] is blank means it will run once, when the main App component loads and if [posts] is passesd it will run everytime the variable posts changes.
 
   const signUp = (event) => {
@@ -110,6 +113,13 @@ function App() {
 
   return (
     <div className="App">
+      {/* Checks if user is logged in or not */}
+      {user?.displayName ? (
+        <FileUpload username={user.displayName} />
+      ) : (
+        <h3> Sorry you need to login for file upload</h3>
+      )}
+
       <Modal
         open={open} //Sign up modal
         onClose={() => setOpen(false)}
@@ -193,6 +203,7 @@ function App() {
           alt=""
         />
       </div>
+      {/* Checks if user is logged in or not */}
       {user ? (
         <Button onClick={() => auth.signOut()}> Log out</Button>
       ) : (
