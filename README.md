@@ -1,4 +1,4 @@
-This project is completely build in ReactJS and Firebase. I have designed and tried to match with with existing instagram we application.
+### This project is completely build in ReactJS and Firebase. I have designed and tried to match with with existing instagram we application.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
