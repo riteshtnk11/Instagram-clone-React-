@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Button, Input } from "@material-ui/core";
 import FileUpload from "./FileUpload";
+import InstagramEmbed from "react-instagram-embed";
 
 function getModalStyle() {
   const top = 50;
@@ -200,28 +201,45 @@ function App() {
           <Button onClick={() => auth.signOut()}> Log out</Button>
         ) : (
           <div className="app__loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}> Sign In</Button>
+            <Button onClick={() => setOpenSignIn(true)}> Login </Button>
             <Button onClick={() => setOpen(true)}> Sign Up</Button>
           </div>
         )}
       </div>
 
-      <h1>Let's build Instagram Clone!</h1>
-
-      {posts.map(({ id, post }) => (
-        <Post
-          key={id} //The unique id of post will render the post with particular id, and not re-render the already rendered post.
-          username={post.username}
-          caption={post.caption}
-          imageUrl={post.imageUrl}
-        />
-      ))}
+      <h1 className="app__posts">Let's build Instagram Clone!</h1>
+      <div className="app__posts">
+        <div className="app__postsLeft">
+          {posts.map(({ id, post }) => (
+            <Post
+              key={id} //The unique id of post will render the post with particular id, and not re-render the already rendered post.
+              username={post.username}
+              caption={post.caption}
+              imageUrl={post.imageUrl}
+            />
+          ))}
+        </div>
+        <div className="app__postsRight">
+          <InstagramEmbed
+            url="https://www.instagram.com/p/B_uf9dmAGPw/"
+            maxwidth={320}
+            hideCaption={false}
+            containerTagName="div"
+            protocol=""
+            injectScript
+            onLoading={() => {}}
+            onSuccess={() => {}}
+            onAfterRender={() => {}}
+            onFailure={() => {}}
+          />
+        </div>
+      </div>
 
       {/* Checks if user is logged in or not */}
       {user?.displayName ? (
         <FileUpload username={user.displayName} />
       ) : (
-        <h3>Please login for file upload</h3>
+        <h3 className="app__posts">Please login for file upload</h3>
       )}
       {/* Header */}
       {/* Posts */}
