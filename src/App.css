@@ -8,6 +8,8 @@
 }
  
 .app__header {
+  position:sticky;
+  top: 0;
   background-color: white;
   padding: 20px;
   border-bottom: 1px solid lightgray;
@@ -23,7 +25,7 @@
 }
 
 .app__postsRight {
-  /* margin-left: 20px; */
+  margin-left: 20px;
 }
 
 .app__headerImage {

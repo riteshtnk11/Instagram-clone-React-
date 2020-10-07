@@ -40,7 +40,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); //User who's signed in
 
   useEffect(() => {
     //frontend event listeners.
@@ -99,8 +99,9 @@ function App() {
         });
       })
       .catch((error) => alert(error.message));
-
     setOpen(false);
+    setEmail("");
+    setPassword("");
   };
 
   const signIn = (event) => {
@@ -110,6 +111,9 @@ function App() {
       .signInWithEmailAndPassword(email, password)
       .catch((error) => alert(error.message));
     setOpenSignIn(false);
+    setUsername("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -213,6 +217,8 @@ function App() {
           {posts.map(({ id, post }) => (
             <Post
               key={id} //The unique id of post will render the post with particular id, and not re-render the already rendered post.
+              postId={id}
+              user={user}
               username={post.username}
               caption={post.caption}
               imageUrl={post.imageUrl}
@@ -221,7 +227,7 @@ function App() {
         </div>
         <div className="app__postsRight">
           <InstagramEmbed
-            url="https://www.instagram.com/p/B_uf9dmAGPw/"
+            url="https://www.instagram.com/p/Zw9o4/"
             maxwidth={320}
             hideCaption={false}
             containerTagName="div"
