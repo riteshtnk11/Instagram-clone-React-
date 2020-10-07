@@ -113,13 +113,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* Checks if user is logged in or not */}
-      {user?.displayName ? (
-        <FileUpload username={user.displayName} />
-      ) : (
-        <h3> Sorry you need to login for file upload</h3>
-      )}
-
       <Modal
         open={open} //Sign up modal
         onClose={() => setOpen(false)}
@@ -202,16 +195,17 @@ function App() {
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
+        {/* Checks if user is logged in or not */}
+        {user ? (
+          <Button onClick={() => auth.signOut()}> Log out</Button>
+        ) : (
+          <div className="app__loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}> Sign In</Button>
+            <Button onClick={() => setOpen(true)}> Sign Up</Button>
+          </div>
+        )}
       </div>
-      {/* Checks if user is logged in or not */}
-      {user ? (
-        <Button onClick={() => auth.signOut()}> Log out</Button>
-      ) : (
-        <div className="app__loginContainer">
-          <Button onClick={() => setOpenSignIn(true)}> Sign In</Button>
-          <Button onClick={() => setOpen(true)}> Sign Up</Button>
-        </div>
-      )}
+
       <h1>Let's build Instagram Clone!</h1>
 
       {posts.map(({ id, post }) => (
@@ -222,6 +216,13 @@ function App() {
           imageUrl={post.imageUrl}
         />
       ))}
+
+      {/* Checks if user is logged in or not */}
+      {user?.displayName ? (
+        <FileUpload username={user.displayName} />
+      ) : (
+        <h3>Please login for file upload</h3>
+      )}
       {/* Header */}
       {/* Posts */}
       {/* Posts */}

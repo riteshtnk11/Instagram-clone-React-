@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import { storage, db } from "./firebase";
 import firebase from "firebase";
+import "./FileUpload.css";
 
 function FileUpload({ username }) {
   //All useState hooks
@@ -58,13 +59,13 @@ function FileUpload({ username }) {
 
   //Main return
   return (
-    <div>
+    <div className="imageupload">
       {/* I want to have */}
       {/* Caption Input  */}
       {/* File picker */}
       {/* Post button */}
 
-      <progress value={progress} max="100" />
+      <progress className="imageupload__progress" value={progress} max="100" />
       <input
         type="text"
         placeholder="Enter a caption..."
