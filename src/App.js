@@ -211,41 +211,44 @@ function App() {
         )}
       </div>
 
-      <h1 className="app__posts">Let's build Instagram Clone!</h1>
+      <h1 className="app__posts">Welcome to Instagram Clone!</h1>
       <div className="app__posts">
-        <div className="app__postsLeft">
-          {posts.map(({ id, post }) => (
-            <Post
-              key={id} //The unique id of post will render the post with particular id, and not re-render the already rendered post.
-              postId={id}
-              user={user}
-              username={post.username}
-              caption={post.caption}
-              imageUrl={post.imageUrl}
+        {user ? (
+          <div className="app__postsLeft">
+            {posts.map(({ id, post }) => (
+              <Post
+                key={id} //The unique id of post will render the post with particular id, and not re-render the already rendered post.
+                postId={id}
+                user={user}
+                username={post.username}
+                caption={post.caption}
+                imageUrl={post.imageUrl}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="app__postsRight">
+            <InstagramEmbed
+              url="https://www.instagram.com/p/Zw9o4/"
+              maxwidth={320}
+              hideCaption={false}
+              containerTagName="div"
+              protocol=""
+              injectScript
+              onLoading={() => {}}
+              onSuccess={() => {}}
+              onAfterRender={() => {}}
+              onFailure={() => {}}
             />
-          ))}
-        </div>
-        <div className="app__postsRight">
-          <InstagramEmbed
-            url="https://www.instagram.com/p/Zw9o4/"
-            maxwidth={320}
-            hideCaption={false}
-            containerTagName="div"
-            protocol=""
-            injectScript
-            onLoading={() => {}}
-            onSuccess={() => {}}
-            onAfterRender={() => {}}
-            onFailure={() => {}}
-          />
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Checks if user is logged in or not */}
       {user?.displayName ? (
         <FileUpload username={user.displayName} />
       ) : (
-        <h3 className="app__posts">Please login for file upload</h3>
+        <h3 className="app__posts">Please login to upload exciting posts.</h3>
       )}
       {/* Header */}
       {/* Posts */}
