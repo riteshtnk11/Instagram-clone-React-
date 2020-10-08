@@ -48,7 +48,7 @@ function App() {
       //keeps user logged in on the page refresh also..(backend event listener)
       if (authUser) {
         // user has logged in
-        console.log(authUser);
+        // console.log(authUser);
         setUser(authUser);
 
         if (authUser.displayName) {
