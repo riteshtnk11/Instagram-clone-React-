@@ -22,7 +22,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: 280,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -211,7 +211,7 @@ function App() {
         )}
       </div>
 
-      <h1 className="app__posts">Welcome to Instagram Clone!</h1>
+      <h1 className="app__posts">Welcome to Ritesh's Instagram!</h1>
       <div className="app__posts">
         {user ? (
           <div className="app__postsLeft">

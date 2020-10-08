@@ -45,7 +45,7 @@ function FileUpload({ username }) {
               // post image inside db
               db.collection("posts").add({
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                caption: caption,
+                caption: url ? caption : '',
                 imageUrl: url,
                 username: username,
               });
