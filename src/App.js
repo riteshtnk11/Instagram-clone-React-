@@ -99,6 +99,7 @@ function App() {
         });
       })
       .catch((error) => alert(error.message));
+
     setOpen(false);
     setEmail("");
     setPassword("");
@@ -220,6 +221,7 @@ function App() {
                 key={id} //The unique id of post will render the post with particular id, and not re-render the already rendered post.
                 postId={id}
                 user={user}
+                email={email}
                 username={post.username}
                 caption={post.caption}
                 imageUrl={post.imageUrl}
@@ -245,8 +247,8 @@ function App() {
       </div>
 
       {/* Checks if user is logged in or not */}
-      {user?.displayName ? (
-        <FileUpload username={user.displayName} />
+      {user?.email ? (
+        <FileUpload username={user.email} />
       ) : (
         <h3 className="app__posts">Please login to upload exciting posts.</h3>
       )}
