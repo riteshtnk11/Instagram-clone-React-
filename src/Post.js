@@ -5,7 +5,7 @@ import "./Post.css";
 import Avatar from "@material-ui/core/Avatar";
 import firebase from "firebase";
 
-function Post({ postId, username, email, user, caption, imageUrl }) {
+function Post({ postId, username, user, caption, imageUrl }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
 
@@ -33,7 +33,6 @@ function Post({ postId, username, email, user, caption, imageUrl }) {
     db.collection("posts").doc(postId).collection("comments").add({
       text: comment,
       username: user.displayName,
-      email: user.email,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setComment(""); //To keep the add comment blank after comment is added
@@ -48,7 +47,7 @@ function Post({ postId, username, email, user, caption, imageUrl }) {
           alt="Ritesh"
           src="/static/images/avatar/1.jpg"
         />
-        <h3>{username ? username : email}</h3>
+        <h3>{username}</h3>
       </div>
 
       {/* Image */}
@@ -56,14 +55,14 @@ function Post({ postId, username, email, user, caption, imageUrl }) {
 
       {/* username and caption */}
       <h4 className="post__text">
-        <strong>{username ? username : email}</strong> {caption}
+        <strong>{username}</strong> {caption}
       </h4>
 
       {/*All Comments on the post*/}
       <div className="post__comments">
         {comments.map((comment) => (
           <div>
-            <strong>{comment.username ? comment.username : comment.email}</strong> {comment.text}
+            <strong>{comment.username}</strong> {comment.text}
           </div>
         ))}
       </div>

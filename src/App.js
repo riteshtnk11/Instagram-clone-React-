@@ -90,16 +90,18 @@ function App() {
 
   const signUp = (event) => {
     event.preventDefault();
-
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        return authUser.user.updateProfile({
-          displayName: username,
-        });
-      })
-      .catch((error) => alert(error.message));
-
+    username
+      ? auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((authUser) => {
+            return authUser.user.updateProfile({
+              displayName: username,
+            });
+            auth.signOut();
+          })
+          .catch((error) => alert(error.message))
+      : alert("please pick unique username");
+    
     setOpen(false);
     setEmail("");
     setPassword("");
@@ -139,6 +141,7 @@ function App() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required={true}
             />
             <Input
               placeholder="email"
@@ -214,7 +217,7 @@ function App() {
 
       <h1 className="app__posts">Welcome to Ritesh's Instagram!</h1>
       <div className="app__posts">
-        {user ? (
+        {user?.displayName ? (
           <div className="app__postsLeft">
             {posts.map(({ id, post }) => (
               <Post
@@ -247,8 +250,10 @@ function App() {
       </div>
 
       {/* Checks if user is logged in or not */}
-      {user?.email ? (
-        <FileUpload username={user.email} />
+      {user?.displayName ? (
+        <FileUpload
+          username={user.displayName}
+        />
       ) : (
         <h3 className="app__posts">Please login to upload exciting posts.</h3>
       )}
